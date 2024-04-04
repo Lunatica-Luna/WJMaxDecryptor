@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WJMaxDecryptor", "WJMaxDecryptor\WJMaxDecryptor.csproj", "{83AFEF82-051C-4D49-8E4D-DFD18E091DBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83AFEF82-051C-4D49-8E4D-DFD18E091DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83AFEF82-051C-4D49-8E4D-DFD18E091DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83AFEF82-051C-4D49-8E4D-DFD18E091DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83AFEF82-051C-4D49-8E4D-DFD18E091DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0EEEFCA-0CBB-457C-9C91-B679E1291BE2}
+	EndGlobalSection
+EndGlobal
