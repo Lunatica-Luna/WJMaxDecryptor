@@ -4,9 +4,26 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
+	<PublishSingleFile>true</PublishSingleFile>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <Title>WJMax Decryptor</Title>
+    <Authors>Alex4386</Authors>
+    <PackageProjectUrl>https://github.com/Alex4386/WJMaxDecryptor</PackageProjectUrl>
+    <Copyright>UNLICENSE</Copyright>
+    <Description>WJMax 콘텐츠를 키로 암/복호화 합니다.</Description>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Alex4386/WJMaxDecryptor</RepositoryUrl>
+    <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
   </PropertyGroup>
 
 </Project>
