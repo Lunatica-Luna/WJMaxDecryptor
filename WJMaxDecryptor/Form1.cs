@@ -5,6 +5,9 @@ namespace WJMaxDecryptor
 {
     public partial class Form1 : Form
     {
+        private int totalFiles = 0;
+        private int processedFiles = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -18,6 +21,48 @@ namespace WJMaxDecryptor
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void CountTotalFiles(string path)
+        {
+            try
+            {
+                // 현재 디렉토리의 파일 수 계산
+                totalFiles += Directory.GetFiles(path).Length;
+
+                // 하위 디렉토리 재귀적 처리
+                foreach (string dir in Directory.GetDirectories(path))
+                {
+                    string dirName = Path.GetFileName(dir);
+
+                    // WJMAX_Data 폴더의 직계 자식 폴더 중 제외할 폴더는 건너뛰기
+                    if (Path.GetFileName(path) == "WJMAX_Data" &&
+                        ROOT_SKIP_FOLDERS.Contains(dirName))
+                    {
+                        continue;
+                    }
+
+                    CountTotalFiles(dir);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"파일 수 계산 중 오류 발생: {ex.Message}");
+            }
+        }
+
+        private void UpdateProgress(string currentFile)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action<string>(UpdateProgress), currentFile);
+                return;
+            }
+
+            processedFiles++;
+            progressBar.Value = (int)((float)processedFiles / totalFiles * 100);
+            statusLabel.Text = $"처리 중: {currentFile}\n진행률: {processedFiles}/{totalFiles} ({progressBar.Value}%)";
+            Application.DoEvents();
         }
 
         private RijndaelManaged GetRijndaelManaged()
@@ -143,6 +188,8 @@ namespace WJMaxDecryptor
                 {
                     File.Copy(sourceFile, targetFile, true);
                 }
+
+                UpdateProgress(fileName);  // 진행 상황 업데이트
             }
 
             // 하위 디렉토리 재귀적 처리
@@ -200,8 +247,21 @@ namespace WJMaxDecryptor
 
                     try
                     {
+                        // 진행 상황 초기화
+                        totalFiles = 0;
+                        processedFiles = 0;
+                        progressBar.Value = 0;
+                        statusLabel.Text = "파일 수 계산 중...";
+
+                        // 전체 파일 수 계산
+                        CountTotalFiles(sourceDialog.SelectedPath);
+
+                        // 처리 시작
                         ProcessDirectory(sourceDialog.SelectedPath, targetDialog.SelectedPath, true);
                         MessageBox.Show("암호화가 완료되었습니다.");
+
+                        // 완료 후 초기화
+                        statusLabel.Text = "완료됨";
                     }
                     catch (Exception ex)
                     {
@@ -222,11 +282,20 @@ namespace WJMaxDecryptor
                 {
                     targetDialog.Description = "결과물 폴더를 선택하세요";
                     if (targetDialog.ShowDialog() != DialogResult.OK) return;
-
                     try
                     {
+                        // 진행 상황 초기화
+                        totalFiles = 0;
+                        processedFiles = 0;
+                        progressBar.Value = 0;
+                        statusLabel.Text = "파일 수 계산 중...";
+                        // 전체 파일 수 계산
+                        CountTotalFiles(sourceDialog.SelectedPath);
+                        // 처리 시작
                         ProcessDirectory(sourceDialog.SelectedPath, targetDialog.SelectedPath, false);
                         MessageBox.Show("복호화가 완료되었습니다.");
+                        // 완료 후 초기화
+                        statusLabel.Text = "완료됨";
                     }
                     catch (Exception ex)
                     {

@@ -32,6 +32,8 @@
             label1 = new Label();
             encryptBtn = new Button();
             decryptBtn = new Button();
+            progressBar = new ProgressBar();
+            statusLabel = new Label();
             SuspendLayout();
             // 
             // keyInput
@@ -72,15 +74,33 @@
             decryptBtn.UseVisualStyleBackColor = true;
             decryptBtn.Click += decryptBtn_Click;
             // 
+            // progressBar
+            // 
+            progressBar.Location = new Point(12, 100);
+            progressBar.Name = "progressBar";
+            progressBar.Size = new Size(360, 23);
+            progressBar.Style = ProgressBarStyle.Continuous;
+            progressBar.TabIndex = 4;
+            // 
+            // statusLabel
+            // 
+            statusLabel.Location = new Point(12, 130);
+            statusLabel.Name = "statusLabel";
+            statusLabel.Size = new Size(360, 40);
+            statusLabel.TabIndex = 5;
+            statusLabel.AutoSize = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(384, 91);
+            ClientSize = new Size(384, 180);
             Controls.Add(decryptBtn);
             Controls.Add(encryptBtn);
             Controls.Add(label1);
             Controls.Add(keyInput);
+            Controls.Add(progressBar);
+            Controls.Add(statusLabel);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "Form1";
             Text = "WJMax 암/복호화기";
@@ -95,5 +115,7 @@
         private Label label1;
         private Button encryptBtn;
         private Button decryptBtn;
+        private ProgressBar progressBar;
+        private Label statusLabel;
     }
 }
